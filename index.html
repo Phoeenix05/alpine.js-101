@@ -4,17 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/unocss.runtime.js"></script>
     <script defer src="/static/alpinejs@3.min.js"></script>
 </head>
 
-<body x-data="{ msg: 'hallo, there alpine!', show: false }">
-    <button x-on:click="show = !show">
-        <span x-show="!show">show</span>
-        <span x-show="show">hide</span>
-    </button>
-    <input type="text" x-model="msg">
-    <p x-show="show" x-text="msg"></p>
-    <p x-show="msg == 'super secret message'">congrats, you have found the secret message :)</p>
+<body x-data>
+    <button x-on:click="$store.darkMode.toggle()">toggle for darkmode</button>
+    <span x-show="$store.darkMode.on">darkmode on</span>
 </body>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('darkMode', false)
+    })
+</script>
 
 </html>
